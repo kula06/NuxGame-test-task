@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property float $win_amount
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  * @property-read User $user
  */
 class GameResult extends Model

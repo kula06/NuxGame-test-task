@@ -13,13 +13,13 @@ class PlayGameActionTest extends TestCase
     {
         parent::setUp();
 
-        $this->action = new PlayGameAction();
+        $this->action = new PlayGameAction;
     }
 
     /**
      * @throws \ReflectionException
      */
-    public function testEvenNumbersIsWinning(): void
+    public function test_even_numbers_is_winning(): void
     {
         $method = new \ReflectionMethod($this->action, 'isWinningNumber');
 
@@ -30,7 +30,7 @@ class PlayGameActionTest extends TestCase
     /**
      * @throws \ReflectionException
      */
-    public function testOddNumbersIsLosing(): void
+    public function test_odd_numbers_is_losing(): void
     {
         $method = new \ReflectionMethod($this->action, 'isWinningNumber');
 
@@ -41,7 +41,7 @@ class PlayGameActionTest extends TestCase
     /**
      * @throws \ReflectionException
      */
-    public function testCalculate(): void
+    public function test_calculate(): void
     {
         $method = new \ReflectionMethod($this->action, 'calculate');
 

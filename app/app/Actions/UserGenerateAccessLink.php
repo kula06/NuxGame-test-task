@@ -12,8 +12,7 @@ class UserGenerateAccessLink
 
     public function __construct(
         protected UserDeactivateAccessLink $userDeactivateAccessLink,
-    ) {
-    }
+    ) {}
 
     public function handle(User $user): AccessLink
     {

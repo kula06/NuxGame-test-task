@@ -10,7 +10,7 @@ class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanRegister(): void
+    public function test_user_can_register(): void
     {
         $response = $this->post('/registration', [
             'username' => 'alex',

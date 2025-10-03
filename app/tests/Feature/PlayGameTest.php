@@ -11,7 +11,7 @@ class PlayGameTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCanPlayGame(): void
+    public function test_user_can_play_game(): void
     {
         $user = User::factory()->create();
 
@@ -23,7 +23,7 @@ class PlayGameTest extends TestCase
         $this->assertDatabaseCount('game_results', 1);
     }
 
-    public function testUserCannotPlayWithExpiredToken(): void
+    public function test_user_cannot_play_with_expired_token(): void
     {
         $user = User::factory()->create();
 

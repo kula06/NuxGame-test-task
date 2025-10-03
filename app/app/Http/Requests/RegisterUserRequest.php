@@ -27,7 +27,7 @@ class RegisterUserRequest extends FormRequest
                 'string',
                 'min:3',
                 'max:255',
-                'alpha_dash:ascii'
+                'alpha_dash:ascii',
             ],
             'phone_number' => [
                 'required',

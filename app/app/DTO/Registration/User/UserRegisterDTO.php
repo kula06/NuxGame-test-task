@@ -9,6 +9,5 @@ final readonly class UserRegisterDTO extends BaseDTO
     public function __construct(
         public string $username,
         public string $phone_number
-    ) {
-    }
+    ) {}
 }

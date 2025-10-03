@@ -10,8 +10,7 @@ final readonly class UserRegister
 {
     public function __construct(
         protected UserGenerateAccessLink $generateAccessLink,
-    ) {
-    }
+    ) {}
 
     public function handle(UserRegisterDTO $dto): User
     {

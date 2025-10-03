@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property int $id
@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @property Carbon $expires_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  * @property-read User $user
  */
 class AccessLink extends Model

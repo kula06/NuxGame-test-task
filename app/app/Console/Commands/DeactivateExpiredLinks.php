@@ -31,7 +31,7 @@ class DeactivateExpiredLinks extends Command
             ->where('expires_at', '<=', now())
             ->update(['is_active' => false]);
 
-        $this->info('Deactivated expired links: ' . $updatedRows);
+        $this->info('Deactivated expired links: '.$updatedRows);
 
         return self::SUCCESS;
     }

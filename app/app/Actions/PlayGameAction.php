@@ -9,7 +9,9 @@ use Random\RandomException;
 class PlayGameAction
 {
     protected const MIN_NUMBER = 1;
+
     protected const MAX_NUMBER = 1000;
+
     protected const SCALE = 2;
 
     protected const RULES = [
@@ -29,9 +31,9 @@ class PlayGameAction
         $winAmount = $isWin ? $this->calculate($number) : '0.00';
 
         return $user->gameResults()->create([
-           'number' => $number,
-           'is_win' => $isWin,
-           'win_amount' => $winAmount,
+            'number' => $number,
+            'is_win' => $isWin,
+            'win_amount' => $winAmount,
         ]);
     }
 
