@@ -21,6 +21,6 @@ class RegistrationController extends Controller
 
         $user = $action->handle($dto);
 
-        return redirect()->back();
+        return redirect()->route('game.index', ['token' => $user->activeAccessLink->token]);
     }
 }

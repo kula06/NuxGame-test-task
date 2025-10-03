@@ -39,6 +39,11 @@ class AccessLink extends Model
         return $query->where('is_active', true)->where('expires_at', '>', Carbon::now());
     }
 
+    public function scopeWithToken(Builder $query, string $token): Builder
+    {
+        return $query->where('token', $token);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
