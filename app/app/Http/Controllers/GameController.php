@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\PlayGameAction;
 use App\Actions\UserDeactivateAccessLink;
+use App\Actions\UserGameHistory;
 use App\Actions\UserGenerateAccessLink;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -39,5 +40,12 @@ class GameController extends Controller
         $gameResult = $action->handle(Auth::user());
 
         return redirect()->back()->with('gameResult', $gameResult);
+    }
+
+    public function history(UserGameHistory $action)
+    {
+        $gameResults = $action->handle(Auth::user());
+
+        return redirect()->back()->with('gameResults', $gameResults);
     }
 }

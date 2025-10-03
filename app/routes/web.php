@@ -16,4 +16,5 @@ Route::prefix('game/{token}')
         Route::post('/regenerate', [GameController::class, 'regenerate'])->name('regenerate');
         Route::post('/deactivate', [GameController::class, 'deactivate'])->name('deactivate');
         Route::post('/play', [GameController::class, 'play'])->name('play');
+        Route::post('/history', [GameController::class, 'history'])->name('history');
     });

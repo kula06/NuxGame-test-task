@@ -33,14 +33,20 @@
             <button class="btn btn-success w-100" type="submit">{{ __('I’m feeling lucky') }}</button>
         </form>
 
-        <button class="btn btn-primary mt-2">{{ __('History') }}</button>
+        <form action="{{ route('game.history', ['token' => request()->route('token')]) }}" method="POST" class="mt-2">
+            @csrf
+
+            <button class="btn btn-primary w-100" type="submit">{{ __('History') }}</button>
+        </form>
 
         @if($gameResult = session('gameResult'))
-            <div class="mt-2 alert alert-{{ $gameResult->is_win ? 'success' : 'danger' }}">
-                <p>{{ __('Number: :number', ['number' => $gameResult->number]) }}</p>
-                <p>{{ __('Result: :is_win', ['is_win' => $gameResult->is_win ? __('Win') : __('Lose')]) }}</p>
-                <p>{{ __('Win Amount: :win_amount', ['win_amount' => $gameResult->win_amount]) }}</p>
-            </div>
+            @include('game.result-item', ['gameResult' => $gameResult])
+        @endif
+
+        @if($gameResults = session('gameResults'))
+            @foreach($gameResults as $gameResult)
+                @include('game.result-item', ['gameResult' => $gameResult])
+            @endforeach
         @endif
 
     </div>
