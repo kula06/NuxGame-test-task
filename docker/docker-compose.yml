@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:
+
+    php:
+        build:
+            args:
+                PUID: "${PUID:-1000}"
+                PGID: "${PGID:-1000}"
+            context: ./php
+        volumes:
+            - ../app:/var/www
+            - composer:/home/www-data/.composer
+        depends_on:
+            - mysql
+        user: www-data
+        networks:
+          - app-network
+
+    nginx:
+        image: nginx:alpine
+        ports:
+            - "8080:80"
+        volumes:
+            - ../app:/var/www
+            - ./nginx/conf.d:/etc/nginx/conf.d
+        depends_on:
+            - php
+        networks:
+          - app-network
+
+    mysql:
+        image: mysql:8.0
+        ports:
+            - "3333:3306"
+        volumes:
+            - mysql-data:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: game
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+        networks:
+          - app-network
+
+volumes:
+    composer: {}
+    mysql-data: {}
+
+networks:
+  app-network:
+    driver: bridge
