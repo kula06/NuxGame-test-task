@@ -6,28 +6,27 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property int $id
  * @property int $user_id
- * @property string $token
- * @property bool $is_active
- * @property Carbon $expires_at
+ * @property int $number
+ * @property bool $is_win
+ * @property float $win_amount
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  * @property-read User $user
  */
-class AccessLink extends Model
+class GameResult extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'token',
-        'expires_at',
-        'is_active',
+        'number',
+        'is_win',
+        'win_amount',
     ];
 
     protected $guarded = [
@@ -35,18 +34,9 @@ class AccessLink extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
+        'is_win' => 'boolean',
+        'win_amount' => 'decimal:2',
     ];
-
-    public function scopeActive(Builder $query): Builder
-    {
-        return $query->where('is_active', true)->where('expires_at', '>', Carbon::now());
-    }
-
-    public function scopeWithToken(Builder $query, string $token): Builder
-    {
-        return $query->where('token', $token);
-    }
 
     public function user(): BelongsTo
     {

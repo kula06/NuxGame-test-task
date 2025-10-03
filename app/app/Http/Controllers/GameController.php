@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\PlayGameAction;
 use App\Actions\UserDeactivateAccessLink;
 use App\Actions\UserGenerateAccessLink;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Random\RandomException;
 
 class GameController extends Controller
 {
@@ -28,5 +29,15 @@ class GameController extends Controller
         $action->handle(Auth::user());
 
         return redirect()->route('home');
+    }
+
+    /**
+     * @throws RandomException
+     */
+    public function play(PlayGameAction $action): RedirectResponse
+    {
+        $gameResult = $action->handle(Auth::user());
+
+        return redirect()->back()->with('gameResult', $gameResult);
     }
 }

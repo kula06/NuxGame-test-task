@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  *
  * @property-read Collection|AccessLink[] $accessLinks
  * @property-read ?AccessLink $activeAccessLink
+ * @property-read Collection|GameResult[] $gameResults
  */
 class User extends Authenticatable
 {
@@ -40,5 +41,10 @@ class User extends Authenticatable
     public function activeAccessLink(): HasOne
     {
         return $this->hasOne(AccessLink::class)->active()->latestOfMany();
+    }
+
+    public function gameResults(): HasMany
+    {
+        return $this->hasMany(GameResult::class);
     }
 }

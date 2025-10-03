@@ -11,7 +11,7 @@
         <form action="{{ route('game.regenerate', ['token' => request()->route('token')]) }}" method="POST">
             @csrf
 
-            <button class="btn btn-primary w-100">Regenerate link</button>
+            <button class="btn btn-primary w-100" type="submit">{{ __('Regenerate link') }}</button>
         </form>
 
         <form
@@ -22,12 +22,26 @@
         >
             @csrf
 
-            <button class="btn btn-danger w-100">Deactivate link</button>
+            <button class="btn btn-danger w-100" type="submit">{{ __('Deactivate link') }}</button>
         </form>
 
         <hr>
-        <button class="btn btn-success">I’m feeling lucky</button>
-        <button class="btn btn-primary">History</button>
+
+        <form action="{{ route('game.play', ['token' => request()->route('token')]) }}" method="POST">
+            @csrf
+
+            <button class="btn btn-success w-100" type="submit">{{ __('I’m feeling lucky') }}</button>
+        </form>
+
+        <button class="btn btn-primary mt-2">{{ __('History') }}</button>
+
+        @if($gameResult = session('gameResult'))
+            <div class="mt-2 alert alert-{{ $gameResult->is_win ? 'success' : 'danger' }}">
+                <p>{{ __('Number: :number', ['number' => $gameResult->number]) }}</p>
+                <p>{{ __('Result: :is_win', ['is_win' => $gameResult->is_win ? __('Win') : __('Lose')]) }}</p>
+                <p>{{ __('Win Amount: :win_amount', ['win_amount' => $gameResult->win_amount]) }}</p>
+            </div>
+        @endif
 
     </div>
 @endsection
