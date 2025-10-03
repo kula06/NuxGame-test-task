@@ -23,4 +23,25 @@ class AccessLinkFactory extends Factory
             'updated_at' => Carbon::now(),
         ];
     }
+
+    public function forUser(User $user): self
+    {
+        return $this->state(fn () => [
+            'user_id' => $user->id,
+        ]);
+    }
+
+    public function active(): self
+    {
+        return $this->state(fn () => [
+            'is_active' => true,
+        ]);
+    }
+
+    public function expired(): self
+    {
+        return $this->state(fn () => [
+            'expires_at' => now()->subDay(),
+        ]);
+    }
 }
