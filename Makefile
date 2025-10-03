@@ -24,5 +24,8 @@ composer:
 env:
 	cp app/.env.example app/.env || true
 
-init: build up env composer key migrate
+wait:
+	sleep 10
+
+init: build up env composer key wait migrate
 	@echo "Done! Visit http://localhost:8080"
