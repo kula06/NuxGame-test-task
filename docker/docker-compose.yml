@@ -1,8 +1,7 @@
-version: "3.7"
-
 services:
 
     php:
+        container_name: nuxgame_test_php
         build:
             args:
                 PUID: "${PUID:-1000}"
@@ -12,12 +11,14 @@ services:
             - ../app:/var/www
             - composer:/home/www-data/.composer
         depends_on:
-            - mysql
+            mysql:
+              condition: service_healthy
         user: www-data
         networks:
           - app-network
 
     nginx:
+        container_name: nuxgame_test_nginx
         image: nginx:alpine
         ports:
             - "8080:80"
@@ -30,6 +31,7 @@ services:
           - app-network
 
     mysql:
+        container_name: nuxgame_test_mysql
         image: mysql:8.0
         ports:
             - "3333:3306"
@@ -40,6 +42,11 @@ services:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_USER: user
             MYSQL_PASSWORD: password
+        healthcheck:
+          test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword" ]
+          interval: 5s
+          timeout: 3s
+          retries: 10
         networks:
           - app-network
 
